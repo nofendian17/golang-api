@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+  webserver:
+    build: "./webserver/nginx"
+    ports:
+      - "80:80"
+    links:
+      - database:database
+    #    volumes:
+    #      - ./src:/var/www
+    depends_on:
+      - app
+      - database
+    networks:
+      - go_app
+
+  database:
+    build: "./database/mongo"
+    restart: unless-stopped
+    tty: true
+#    hostname: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./database/mongo/docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      #- dbdata:/data/db
+#    command: ["--auth"]
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: password
+#      MONGO_INITDB_DATABASE: root-db
+    networks:
+      - go_app
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /go/bin
+    #    volumes:
+    #      - ./src:/var/www
+    ports:
+      - "8080"
+    networks:
+      - go_app
+
+  redis:
+    build: "./database/redis"
+    command: ["redis-server", "--appendonly", "yes"]
+    #hostname: redis
+    ports:
+      - "6379"
+    volumes:
+      - dbdata:/var/lib/redis
+    networks:
+      - go_app
+
+#Docker Networks
+networks:
+  go_app:
+    driver: "bridge"
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local

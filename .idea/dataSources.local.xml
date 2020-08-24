@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="api_dev_db@0.0.0.0" uuid="35603fda-d314-4f48-a5d2-45d36f34d21f">
+      <database-info product="Mongo DB" version="4.4.0" jdbc-version="4.2" driver-name="MongoDB JDBC Driver" driver-version="1.8.2" dbms="MONGO" exact-version="4.4.0" exact-driver-version="1.8" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>api_user</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="api_dev_db" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+  </component>
+</project>
