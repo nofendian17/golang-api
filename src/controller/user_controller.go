@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/nofendian17/logAudit/entity"
-	"github.com/nofendian17/logAudit/service"
+	"github.com/nofendian17/golang-api/entity"
+	"github.com/nofendian17/golang-api/service"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -51,7 +51,7 @@ func (c controller) Update(ctx *gin.Context) error {
 	}
 	id := ctx.Param("id")
 	oid, err := primitive.ObjectIDFromHex(id)
-	user.ID =  oid
+	user.ID = oid
 	c.service.Update(user)
 	return nil
 }
@@ -64,7 +64,7 @@ func (c controller) Delete(ctx *gin.Context) error {
 	}
 	id := ctx.Param("id")
 	oid, err := primitive.ObjectIDFromHex(id)
-	user.ID =  oid
+	user.ID = oid
 	c.service.Delete(user)
 	return nil
 }

@@ -1,4 +1,4 @@
-module github.com/nofendian17/logAudit
+module github.com/nofendian17/golang-api
 
 go 1.14
 

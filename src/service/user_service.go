@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/nofendian17/logAudit/entity"
-	"github.com/nofendian17/logAudit/repository"
+	"github.com/nofendian17/golang-api/entity"
+	"github.com/nofendian17/golang-api/repository"
 )
 
 type UserService interface {

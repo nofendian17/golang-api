@@ -2,19 +2,18 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/nofendian17/logAudit/controller"
-	"github.com/nofendian17/logAudit/middlewares"
-	"github.com/nofendian17/logAudit/repository"
-	"github.com/nofendian17/logAudit/service"
+	"github.com/nofendian17/golang-api/controller"
+	"github.com/nofendian17/golang-api/middlewares"
+	"github.com/nofendian17/golang-api/repository"
+	"github.com/nofendian17/golang-api/service"
 	"net/http"
 )
 
 var (
 	userRepository repository.UserRepository = repository.NewUserRepository()
-	userService service.UserService = service.New(userRepository)
+	userService    service.UserService       = service.New(userRepository)
 	userController controller.UserController = controller.New(userService)
 )
-
 
 func main() {
 	server := gin.New()
@@ -23,8 +22,8 @@ func main() {
 	server.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
 			"app_name": "log audit golang",
-			"version": "1.0.0",
-			"message": "welcome to application",
+			"version":  "1.0.0",
+			"message":  "welcome to application",
 		})
 	})
 
@@ -35,7 +34,7 @@ func main() {
 	server.POST("/users", func(ctx *gin.Context) {
 		err := userController.Save(ctx)
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error" : err.Error()})
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		} else {
 			ctx.JSON(200, userController.FindAll())
 		}
@@ -45,7 +44,7 @@ func main() {
 	server.PUT("/users/:id", func(ctx *gin.Context) {
 		err := userController.Update(ctx)
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error" : err.Error()})
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		} else {
 			ctx.JSON(200, userController.FindAll())
 		}
@@ -55,7 +54,7 @@ func main() {
 	server.DELETE("/users/:id", func(ctx *gin.Context) {
 		err := userController.Delete(ctx)
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error" : err.Error()})
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		} else {
 			ctx.JSON(200, userController.FindAll())
 		}

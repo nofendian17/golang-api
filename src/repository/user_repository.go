@@ -3,8 +3,8 @@ package repository
 import (
 	"fmt"
 	"github.com/Kamva/mgm/v3"
-	"github.com/nofendian17/logAudit/db"
-	"github.com/nofendian17/logAudit/entity"
+	"github.com/nofendian17/golang-api/db"
+	"github.com/nofendian17/golang-api/entity"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
